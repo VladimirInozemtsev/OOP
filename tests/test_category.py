@@ -1,5 +1,5 @@
 import unittest
-from src.category import Product, Category  # Импортируем классы
+from src.category import Product, Category
 
 
 class TestProductCategory(unittest.TestCase):
@@ -17,27 +17,19 @@ class TestProductCategory(unittest.TestCase):
         category = Category("Категория 1", "Описание категории 1", [product1, product2])
         self.assertEqual(category.name, "Категория 1")
         self.assertEqual(category.description, "Описание категории 1")
-        self.assertEqual(
-            category.products, [product1, product2]
-        )  # Проверяем, что список товаров заполнен
+        self.assertEqual(category.products, [product1, product2])
 
     def test_category_count_products(self):
         product1 = Product("Товар 1", "Описание товара 1", 100.50, 5)
         product2 = Product("Товар 2", "Описание товара 2", 50.00, 10)
         category = Category("Категория 1", "Описание категории 1", [product1, product2])
-        self.assertEqual(
-            len(category.products), 2
-        )  # Проверяем количество товаров в категории
-        self.assertEqual(
-            Category.product_count, 2
-        )  # Проверяем общее количество товаров
+        self.assertEqual(len(category.products), 2)
+        self.assertEqual(Category.product_count, 2)
 
     def test_category_count_categories(self):
         category1 = Category("Категория 1", "Описание категории 1", [])
         category2 = Category("Категория 2", "Описание категории 2", [])
-        self.assertEqual(
-            Category.category_count, 2
-        )  # Проверяем общее количество категорий
+        self.assertEqual(Category.category_count, 2)
 
 
 if __name__ == "__main__":
