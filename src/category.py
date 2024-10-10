@@ -104,10 +104,10 @@ class Category:
         """
         Геттер для вывода списка товаров в виде строк.
         """
-        product_strigs = []
+        product_strings = []
         for product in self.__products:
-            product_strigs.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
-        return product_strigs
+            product_strings.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n")
+        return product_strings
 
 
 if __name__ == "__main__":
