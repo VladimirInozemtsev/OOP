@@ -19,7 +19,7 @@ class TestProductCategory(unittest.TestCase):
         self.assertEqual(category.name, "Категория 1")
         self.assertEqual(category.description, "Описание категории 1")
         self.assertCountEqual(
-            category.products, ["Товар 1, 100.5 руб. Остаток: 5 шт.", "Товар 2, 50.0 руб. Остаток: 10 шт."]
+            category.products, ["Товар 1, 100.5 руб. Остаток: 5 шт.\n", "Товар 2, 50.0 руб. Остаток: 10 шт.\n"]
         )
 
     def test_category_count_products(self):
