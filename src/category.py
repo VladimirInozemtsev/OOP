@@ -135,7 +135,7 @@ class Category:
 
         """
         products_str = "\n".join(f"  - {product}" for product in self.__products)
-        return f"{self.name}:\n{products_str}"
+        return f"{self.name}, количество продуктов: {len(self.__products)} шт."
 
 
 class CategoryIterator:
