@@ -6,7 +6,6 @@ from src.product import Product, Smartphone, LawnGrass
 
 class TestCategory(unittest.TestCase):
 
-
     def test_category_init(self):
         product1 = Product("Товар 1", "Описание товара 1", 100.50, 5)
         product2 = Product("Товар 2", "Описание товара 2", 50.00, 10)

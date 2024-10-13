@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseProduct(ABC):
     """
     Абстрактный базовый класс для продуктов.
@@ -26,16 +27,19 @@ class BaseProduct(ABC):
         """
         pass
 
+
 class ReprMixin:
     """
     Класс-миксин для вывода информации о создании объекта.
     """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         print(f"Создан объект класса {self.__class__.__name__} с параметрами: {args}, {kwargs}")
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name}, {self.description}, {self._price}, {self.quantity})"
+
 
 class Product(ReprMixin, BaseProduct):
     """

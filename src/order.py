@@ -1,6 +1,7 @@
 from src.product import Product
 from src.category import BaseEntity
 
+
 class Order(BaseEntity):
     """
     Класс для представления заказа, наследник BaseEntity.
@@ -28,5 +29,7 @@ class Order(BaseEntity):
         return self.product.price * self.quantity
 
     def __str__(self):
-        return (f"Заказ: {self.name}, Товар: {self.product.name}, "
-                f"Количество: {self.quantity}, Общая стоимость: {self.total_price} руб.")
+        return (
+            f"Заказ: {self.name}, Товар: {self.product.name}, "
+            f"Количество: {self.quantity}, Общая стоимость: {self.total_price} руб."
+        )

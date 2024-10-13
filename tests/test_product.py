@@ -4,13 +4,15 @@ from src.product import Product
 import pytest
 from src.product import Product, Smartphone, LawnGrass
 
+
 class TestReprMixin(unittest.TestCase):
 
     @patch("builtins.print")
     def test_mixin_creation(self, mock_print):
         product = Product("Test Product", "Test Description", 1500.0, 10)
-        mock_print.assert_called_with("Создан объект класса Product с параметрами: ('Test Product', 'Test Description', 1500.0, 10), {}")
-
+        mock_print.assert_called_with(
+            "Создан объект класса Product с параметрами: ('Test Product', 'Test Description', 1500.0, 10), {}"
+        )
 
 
 class TestProduct:

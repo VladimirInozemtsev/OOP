@@ -2,6 +2,7 @@ import pytest
 from src.order import Order
 from src.product import Product
 
+
 class TestOrder:
 
     def test_order_creation(self, order, product):

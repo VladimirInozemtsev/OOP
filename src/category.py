@@ -6,6 +6,7 @@ class BaseEntity(ABC):
     """
     Абстрактный базовый класс для сущностей с общими свойствами name и description.
     """
+
     def __init__(self, name: str, description: str):
         self.name = name
         self.description = description
@@ -15,6 +16,7 @@ class BaseEntity(ABC):
         """
         Абстрактный метод для расчета итоговой стоимости или количества.
         """
+
     pass
 
     def __str__(self):
