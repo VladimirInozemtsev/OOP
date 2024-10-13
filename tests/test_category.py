@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
-from src.category import Product, Category, CategoryIterator
+from src.category import Category, CategoryIterator
+from src.product import Product, Smartphone, LawnGrass
 
 
 class TestProductCategory(unittest.TestCase):
@@ -84,6 +85,45 @@ class TestProductCategory(unittest.TestCase):
         product = Product("Товар 1", "Описание", 100.0, 5)
         product.price = 0.0
         self.assertEqual(product.price, 100.0)
+
+    def test_smartphone_init(self):
+        smartphone = Smartphone(
+            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5, "95.5", "S23 Ultra", 256, "Серый"
+        )
+        self.assertEqual(smartphone.name, "Samsung Galaxy S23 Ultra")
+        self.assertEqual(smartphone.description, "256GB, Серый цвет")
+        self.assertEqual(smartphone.price, 180000.0)
+        self.assertEqual(smartphone.quantity, 5)
+        self.assertEqual(smartphone.efficiency, "95.5")
+        self.assertEqual(smartphone.model, "S23 Ultra")
+        self.assertEqual(smartphone.memory, 256)
+        self.assertEqual(smartphone.color, "Серый")
+
+    def test_lawngrass_init(self):
+        grass = LawnGrass("Газонная трава", "Элитная трава", 500.0, 20, "Россия", 7, "Зеленый")
+        self.assertEqual(grass.name, "Газонная трава")
+        self.assertEqual(grass.description, "Элитная трава")
+        self.assertEqual(grass.price, 500.0)
+        self.assertEqual(grass.quantity, 20)
+        self.assertEqual(grass.country, "Россия")
+        self.assertEqual(grass.germination_period, 7)
+        self.assertEqual(grass.color, "Зеленый")
+
+    def test_add_same_type(self):
+        smartphone1 = Smartphone(
+            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5, "95.5", "S23 Ultra", 256, "Серый"
+        )
+        smartphone2 = Smartphone("Iphone 15", "512GB, Gray space", 210000.0, 8, "98.2", "15", 512, "Gray space")
+        result = smartphone1 + smartphone2
+        self.assertEqual(result, smartphone1.price * smartphone1.quantity + smartphone2.price * smartphone2.quantity)
+
+    def test_add_different_type(self):
+        smartphone = Smartphone(
+            "Samsung Galaxy S23 Ultra", "256GB, Серый цвет", 180000.0, 5, "95.5", "S23 Ultra", 256, "Серый"
+        )
+        grass = LawnGrass("Газонная трава", "Элитная трава", 500.0, 20, "Россия", "7", "Зеленый")
+        with self.assertRaises(TypeError):
+            result = smartphone + grass
 
 
 class TestCategoryIterator(unittest.TestCase):

@@ -1,90 +1,4 @@
-class Product:
-    """
-    Класс для представления товара.
-    """
-
-    def __init__(self, name: str, description: str, price: float, quantity: int):
-        """
-        Инициализация объекта товара.
-
-        Args:
-            name: Название товара.
-            description: Описание товара.
-            price: Цена товара.
-            quantity: Количество товара в наличии.
-        """
-        self.name = name
-        self.description = description
-        self.__price = price
-        self.quantity = quantity
-
-    @property
-    def price(self):
-        """
-        Геттер для получения цены товара.
-        """
-        return self.__price
-
-    @price.setter
-    def price(self, new_price: float):
-        """
-        Сеттер для изменения цены товара
-        Args:
-             new_price: Новая цена товара.
-        """
-        if new_price <= 0:
-            print("Цена не должна быть нулевая или отрицательная")
-            return
-        if new_price < self.__price:
-            confirmation = input(f"Подтвердите понижение цены с {self.__price} до {new_price} (y/n): ").lower()
-            if confirmation != "y":
-                print("Понижение цены отменено.")
-                return
-        self.__price = new_price
-
-    @classmethod
-    def new_product(cls, product_data: dict, existing_products: list = None):
-        """
-        Создает новый объект Product из словаря данных.
-        Args:
-             product_data: Словарь с данными о товаре.
-             existing_products: Список существующих товаров (для проверки дубликатов).
-        Returns:
-            Объект класса Product.
-        """
-        name = product_data.get("name")
-        description = product_data.get("description")
-        price = product_data.get("price")
-        quantity = product_data.get("quantity")
-
-        if existing_products:
-            for existing_product in existing_products:
-                if existing_product.name.lower() == name.lower():
-                    existing_product.quantity += quantity
-                    existing_product.price = max(existing_product.price, price)
-                    return existing_product
-
-        return cls(name, description, price, quantity)
-
-    def __str__(self):
-        """
-        Возвращает строковое представление объекта Product.
-        """
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
-
-    def __add__(self, other):
-        """
-        Сложение товаров: возвращает сумму стоимости товаров на складе.
-
-        Args:
-            other: Любой объект Product.
-
-        Returns:
-            Сумма стоимости товаров (float).
-        """
-        if not isinstance(other, Product):
-            raise TypeError("Складывать можно только объекты Product.")
-        return self.price * self.quantity + other.price * other.quantity
+from src.product import Product
 
 
 class Category:
@@ -134,7 +48,7 @@ class Category:
         Возвращает строковое представление объекта Category.
 
         """
-        products_str = "\n".join(f"  - {product}" for product in self.__products)
+        # products_str = "\n".join(f"  - {product}" for product in self.__products)
         return f"{self.name}, количество продуктов: {len(self.__products)} шт."
 
 
