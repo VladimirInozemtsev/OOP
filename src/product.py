@@ -1,22 +1,49 @@
-class Product:
+from abc import ABC, abstractmethod
+
+class BaseProduct(ABC):
     """
-    Класс для представления товара.
+    Абстрактный базовый класс для продуктов.
     """
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
-        """
-        Инициализация объекта товара.
-
-        Args:
-            name: Название товара.
-            description: Описание товара.
-            price: Цена товара.
-            quantity: Количество товара в наличии.
-        """
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+
+    @property
+    @abstractmethod
+    def price(self):
+        """
+        Абстрактное свойство для получения цены товара.
+        """
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        """
+        Абстрактный метод для строкового представления продукта.
+        """
+        pass
+
+class ReprMixin:
+    """
+    Класс-миксин для вывода информации о создании объекта.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print(f"Создан объект класса {self.__class__.__name__} с параметрами: {args}, {kwargs}")
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.__price}, {self.quantity})"
+
+class Product(ReprMixin, BaseProduct):
+    """
+    Класс для представления товара, наследник абстрактного класса BaseProduct.
+    """
+
+    def __init__(self, name: str, description: str, price: float, quantity: int):
+        super().__init__(name, description, price, quantity)
 
     @property
     def price(self):
