@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from src.category import Product, Category
+from src.category import Product, Category, CategoryIterator
 
 
 class TestProductCategory(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestProductCategory(unittest.TestCase):
         self.assertEqual(category.name, "Категория 1")
         self.assertEqual(category.description, "Описание категории 1")
         self.assertCountEqual(
-            category.products, ["Товар 1, 100.5 руб. Остаток: 5 шт.\n", "Товар 2, 50.0 руб. Остаток: 10 шт.\n"]
+            category.products, ["Товар 1, 100.5 руб. Остаток: 5 шт.", "Товар 2, 50.0 руб. Остаток: 10 шт."]
         )
 
     def test_category_count_products(self):
@@ -84,6 +84,22 @@ class TestProductCategory(unittest.TestCase):
         product = Product("Товар 1", "Описание", 100.0, 5)
         product.price = 0.0
         self.assertEqual(product.price, 100.0)
+
+
+class TestCategoryIterator(unittest.TestCase):
+
+    def test_iterator(self):
+        category = Category("Категория 1", "Описание категории 1")
+        product1 = Product("Товар 1", "Описание 1", 100.0, 10)
+        product2 = Product("Товар 2", "Описание 2", 200.0, 5)
+        category.add_product(product1)
+        category.add_product(product2)
+
+        iterator = CategoryIterator(category)
+        self.assertEqual(str(next(iterator)), str(product1))
+        self.assertEqual(str(next(iterator)), str(product2))
+        with self.assertRaises(StopIteration):
+            next(iterator)
 
 
 if __name__ == "__main__":
