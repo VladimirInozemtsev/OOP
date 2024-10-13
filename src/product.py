@@ -8,7 +8,7 @@ class BaseProduct(ABC):
     def __init__(self, name: str, description: str, price: float, quantity: int):
         self.name = name
         self.description = description
-        self.__price = price
+        self._price = price
         self.quantity = quantity
 
     @property
@@ -35,7 +35,7 @@ class ReprMixin:
         print(f"Создан объект класса {self.__class__.__name__} с параметрами: {args}, {kwargs}")
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.__price}, {self.quantity})"
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self._price}, {self.quantity})"
 
 class Product(ReprMixin, BaseProduct):
     """
@@ -50,7 +50,7 @@ class Product(ReprMixin, BaseProduct):
         """
         Геттер для получения цены товара.
         """
-        return self.__price
+        return self._price
 
     @price.setter
     def price(self, new_price: float):
@@ -62,12 +62,12 @@ class Product(ReprMixin, BaseProduct):
         if new_price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
-        if new_price < self.__price:
-            confirmation = input(f"Подтвердите понижение цены с {self.__price} до {new_price} (y/n): ").lower()
+        if new_price < self._price:
+            confirmation = input(f"Подтвердите понижение цены с {self._price} до {new_price} (y/n): ").lower()
             if confirmation != "y":
                 print("Понижение цены отменено.")
                 return
-        self.__price = new_price
+        self._price = new_price
 
     @classmethod
     def new_product(cls, product_data: dict, existing_products: list = None):
