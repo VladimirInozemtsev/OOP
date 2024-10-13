@@ -96,8 +96,17 @@ class Smartphone(Product):
     Класс для представления смартфона.
     """
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: str, model: str,
-                 memory: int, color: str):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: str,
+        model: str,
+        memory: int,
+        color: str,
+    ):
         """
         Инициализация объекта смартфона.
 
@@ -121,9 +130,11 @@ class Smartphone(Product):
         """
         Возвращает строковое представление объекта Smartphone.
         """
-        return (f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
-                f"Производительность: {self.efficiency}, Цвет: {self.color}), "
-                f"{self.price} руб. Остаток: {self.quantity} шт.")
+        return (
+            f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
+            f"Производительность: {self.efficiency}, Цвет: {self.color}), "
+            f"{self.price} руб. Остаток: {self.quantity} шт."
+        )
 
 
 class LawnGrass(Product):
@@ -131,8 +142,16 @@ class LawnGrass(Product):
     Класс для представления газонной травы.
     """
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, country: str, germination_period: str,
-                 color: str):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ):
         """
         Инициализация объекта газонной травы.
 
@@ -154,5 +173,7 @@ class LawnGrass(Product):
         """
         Возвращает строковое представление объекта LawnGrass.
         """
-        return (f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
-                f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт.")
+        return (
+            f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
+            f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт."
+        )

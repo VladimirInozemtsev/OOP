@@ -48,7 +48,7 @@ class Category:
         Возвращает строковое представление объекта Category.
 
         """
-        #products_str = "\n".join(f"  - {product}" for product in self.__products)
+        # products_str = "\n".join(f"  - {product}" for product in self.__products)
         return f"{self.name}, количество продуктов: {len(self.__products)} шт."
 
 
