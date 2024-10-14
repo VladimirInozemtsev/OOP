@@ -127,45 +127,17 @@ class Smartphone(Product):
     Класс для представления смартфона.
     """
 
-    def __init__(
-        self,
-        name: str,
-        description: str,
-        price: float,
-        quantity: int,
-        efficiency: str,
-        model: str,
-        memory: int,
-        color: str,
-    ):
-        """
-        Инициализация объекта смартфона.
-
-        Args:
-            name: Название товара.
-            description: Описание товара.
-            price: Цена товара.
-            quantity: Количество товара в наличии.
-            efficiency: Производительность смартфона.
-            model: Модель смартфона.
-            memory: Объем встроенной памяти смартфона.
-            color: Цвет смартфона.
-        """
-        super().__init__(name, description, price, quantity)  # Наследуем общие свойства от Product
+    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: str, model: str, memory: int, color: str):
+        super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
         self.memory = memory
         self.color = color
 
     def __str__(self):
-        """
-        Возвращает строковое представление объекта Smartphone.
-        """
-        return (
-            f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
-            f"Производительность: {self.efficiency}, Цвет: {self.color}), "
-            f"{self.price} руб. Остаток: {self.quantity} шт."
-        )
+        return (f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
+                f"Производительность: {self.efficiency}, Цвет: {self.color}), "
+                f"{self.price} руб. Остаток: {self.quantity} шт.")
 
 
 class LawnGrass(Product):
@@ -173,38 +145,14 @@ class LawnGrass(Product):
     Класс для представления газонной травы.
     """
 
-    def __init__(
-        self,
-        name: str,
-        description: str,
-        price: float,
-        quantity: int,
-        country: str,
-        germination_period: str,
-        color: str,
-    ):
-        """
-        Инициализация объекта газонной травы.
-
-        Args:
-            name: Название товара.
-            description: Описание товара.
-            price: Цена товара.
-            quantity: Количество товара в наличии.
-            country: Страна-производитель.
-            germination_period: Срок прорастания в днях.
-            color: Цвет травы.
-        """
-        super().__init__(name, description, price, quantity)  # Наследуем общие свойства от Product
+    def __init__(self, name: str, description: str, price: float, quantity: int, country: str, germination_period: int, color: str):
+        super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
         self.color = color
 
     def __str__(self):
-        """
-        Возвращает строковое представление объекта LawnGrass.
-        """
-        return (
-            f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
-            f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт."
-        )
+        return (f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
+                f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт.")
+
+
