@@ -1,25 +1,38 @@
 from src.product import Product
+from abc import ABC, abstractmethod
 
 
-class Category:
+class BaseEntity(ABC):
     """
-    Класс для представления категории товаров.
+    Абстрактный базовый класс для сущностей с общими свойствами name и description.
+    """
+
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
+
+    @abstractmethod
+    def calculate_total(self):
+        """
+        Абстрактный метод для расчета итоговой стоимости или количества.
+        """
+
+    pass
+
+    def __str__(self):
+        return f"{self.name}: {self.description}"
+
+
+class Category(BaseEntity):
+    """
+    Класс для представления категории товаров, наследник BaseEntity.
     """
 
     category_count = 0
     product_count = 0
 
     def __init__(self, name: str, description: str, products: list = None):
-        """
-        Инициализация объекта категории.
-
-        Args:
-            name: Название категории.
-            description: Описание категории.
-
-        """
-        self.name = name
-        self.description = description
+        super().__init__(name, description)
         self.__products = products or []
         Category.category_count += 1
         Category.product_count += len(self.products)
@@ -30,6 +43,11 @@ class Category:
         Args:
             product: Объект класса Product.
         """
+        if not isinstance(product, Product):
+            raise TypeError(
+                f"Нельзя добавить объект типа {type(product).__name__}."
+                f"Ожидается объект класса Product или его наследников."
+            )
         self.__products.append(product)
         Category.product_count += 1
 
@@ -43,12 +61,17 @@ class Category:
             product_strings.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
         return product_strings
 
+    def calculate_total(self):
+        """
+        Рассчитывает общее количество товаров в категории.
+        """
+        return len(self.__products)
+
     def __str__(self):
         """
         Возвращает строковое представление объекта Category.
 
         """
-        # products_str = "\n".join(f"  - {product}" for product in self.__products)
         return f"{self.name}, количество продуктов: {len(self.__products)} шт."
 
 
@@ -86,30 +109,3 @@ class CategoryIterator:
             return product
         else:
             raise StopIteration
-
-
-if __name__ == "__main__":
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
-
-    print(str(product1))
-    print(str(product2))
-    print(str(product3))
-
-    category1 = Category(
-        "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        [product1, product2, product3],
-    )
-
-    print(str(category1))
-
-    print(category1.products)
-
-    print(product1 + product2)
-    print(product1 + product3)
-    print(product2 + product3)
-
-    for product in CategoryIterator(category1):
-        print(product)

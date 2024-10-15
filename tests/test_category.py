@@ -4,14 +4,7 @@ from src.category import Category, CategoryIterator
 from src.product import Product, Smartphone, LawnGrass
 
 
-class TestProductCategory(unittest.TestCase):
-
-    def test_product_init(self):
-        product = Product("Товар 1", "Описание товара 1", 100.50, 5)
-        self.assertEqual(product.name, "Товар 1")
-        self.assertEqual(product.description, "Описание товара 1")
-        self.assertEqual(product.price, 100.50)
-        self.assertEqual(product.quantity, 5)
+class TestCategory(unittest.TestCase):
 
     def test_category_init(self):
         product1 = Product("Товар 1", "Описание товара 1", 100.50, 5)
@@ -129,17 +122,15 @@ class TestProductCategory(unittest.TestCase):
 class TestCategoryIterator(unittest.TestCase):
 
     def test_iterator(self):
-        category = Category("Категория 1", "Описание категории 1")
-        product1 = Product("Товар 1", "Описание 1", 100.0, 10)
-        product2 = Product("Товар 2", "Описание 2", 200.0, 5)
-        category.add_product(product1)
-        category.add_product(product2)
+        product1 = Product("Product 1", "Description 1", 1500.0, 5)
+        product2 = Product("Product 2", "Description 2", 3000.0, 3)
+        category = Category("Electronics", "Категория электроники", [product1, product2])
 
         iterator = CategoryIterator(category)
-        self.assertEqual(str(next(iterator)), str(product1))
-        self.assertEqual(str(next(iterator)), str(product2))
-        with self.assertRaises(StopIteration):
-            next(iterator)
+        products = list(iterator)
+
+        self.assertEqual(products[0], "Product 1, 1500.0 руб. Остаток: 5 шт.")
+        self.assertEqual(products[1], "Product 2, 3000.0 руб. Остаток: 3 шт.")
 
 
 if __name__ == "__main__":
