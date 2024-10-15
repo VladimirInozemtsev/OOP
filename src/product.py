@@ -40,6 +40,14 @@ class ReprMixin:
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name}, {self.description}, {self._price}, {self.quantity})"
 
+class InvalidQuantityError(Exception):
+    """
+    Исключение для обработки товаров с нулевым количеством.
+    """
+    def __init__(self, message="Товар с нулевым количеством не может быть добавлен"):
+        self.message = message
+        super().__init__(self.message)
+
 
 class Product(ReprMixin, BaseProduct):
     """
@@ -47,6 +55,8 @@ class Product(ReprMixin, BaseProduct):
     """
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
+        if quantity <= 0:
+            raise InvalidQuantityError
         super().__init__(name, description, price, quantity)
 
     @property
