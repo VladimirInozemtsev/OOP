@@ -2,12 +2,13 @@ from src.product import Product
 from src.category import Category
 from src.exception import InvalidQuantityError
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         product_invalid = Product("Бракованный товар", "Неверное количество", 1000.0, 0)
     except InvalidQuantityError as e:
         print(
-            "Возникла ошибка InvalidQuantityError прерывающая работу программы при попытке добавить продукт с нулевым количеством")
+            "Возникла ошибка InvalidQuantityError прерывающая работу программы при попытке добавить продукт с нулевым количеством"
+        )
     else:
         print("Не возникла ошибка InvalidQuantityError при попытке добавить продукт с нулевым количеством")
 

@@ -42,8 +42,6 @@ class ReprMixin:
         return f"{self.__class__.__name__}({self.name}, {self.description}, {self._price}, {self.quantity})"
 
 
-
-
 class Product(ReprMixin, BaseProduct):
     """
     Класс для представления товара, наследник абстрактного класса BaseProduct.
@@ -132,7 +130,17 @@ class Smartphone(Product):
     Класс для представления смартфона.
     """
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: str, model: str, memory: int, color: str):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: str,
+        model: str,
+        memory: int,
+        color: str,
+    ):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
@@ -140,9 +148,11 @@ class Smartphone(Product):
         self.color = color
 
     def __str__(self):
-        return (f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
-                f"Производительность: {self.efficiency}, Цвет: {self.color}), "
-                f"{self.price} руб. Остаток: {self.quantity} шт.")
+        return (
+            f"{self.name} (Модель: {self.model}, Память: {self.memory}GB, "
+            f"Производительность: {self.efficiency}, Цвет: {self.color}), "
+            f"{self.price} руб. Остаток: {self.quantity} шт."
+        )
 
 
 class LawnGrass(Product):
@@ -150,14 +160,23 @@ class LawnGrass(Product):
     Класс для представления газонной травы.
     """
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, country: str, germination_period: int, color: str):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: int,
+        color: str,
+    ):
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
         self.color = color
 
     def __str__(self):
-        return (f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
-                f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт.")
-
-
+        return (
+            f"{self.name} (Производство: {self.country}, Срок прорастания: {self.germination_period} дней, "
+            f"Цвет: {self.color}), {self.price} руб. Остаток: {self.quantity} шт."
+        )

@@ -121,4 +121,3 @@ class CategoryIterator:
             return product
         else:
             raise StopIteration
-
