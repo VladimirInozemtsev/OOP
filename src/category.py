@@ -67,6 +67,18 @@ class Category(BaseEntity):
         """
         return len(self.__products)
 
+    def average_price(self):
+        """
+        Подсчитывает среднюю цену всех товаров в категории.
+        Возвращает 0, если товаров в категории нет (деление на ноль).
+        """
+        try:
+            total_price = sum(product.price for product in self.__products)
+            average_price = total_price / len(self.__products)
+            return average_price
+        except ZeroDivisionError:
+            return 0
+
     def __str__(self):
         """
         Возвращает строковое представление объекта Category.
